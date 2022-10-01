@@ -1,0 +1,85 @@
+*,::after,::before{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html{
+    font-family: Poppins, sans-serif;
+    font-size: 62.5%;
+    color: rgb(241, 239, 239, .9);
+    background-color: rgba(0, 0, 0, .85);
+}
+.formulario{
+    margin: auto;
+    padding: 2rem;
+    height: 100vh;
+    width: 100%;
+    max-width: 50rem;
+}
+.formulario__titulo{
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2.3rem;
+}
+.formulario__datos{
+    display: flex;
+    flex-direction: column;
+}
+.formulario__datos input{
+    margin: 1rem 0;
+    background: none;
+    border: none;
+    outline: none;
+    line-height: 3rem;
+    color: #ffffff;
+}
+.formulario__datos input:active, .formulario__datos input:focus{
+    border-bottom: 1px solid #ffffff;
+}
+.formulario__datos input{
+    margin: 1rem 0;
+    background: none;
+    border: none;
+    outline: none;
+    line-height: 3rem;
+    color: #ffffff;
+}
+.formulario__datos input[type=number]::-webkit-inner-spin-button, .formulario__datos input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+}
+.formulario__datos input[type=number] { 
+    -moz-appearance:textfield; 
+}
+
+.formulario__datos button{
+    margin: 1rem 0;
+    border: none;
+    outline: none;
+    height: 3rem;
+    border-radius: 5px;
+    text-transform: uppercase;
+    background-color: rgba(0, 0, 0, .8);
+    color: #ffffff;
+    cursor: pointer;
+}
+.listado__contacto{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 4rem;
+    width: 100%;
+    border-bottom: 1px solid #ffffff;  
+}
+.listado__icono{
+    color: rgb(201, 58, 32);
+    cursor: pointer;
+}
+
+@media screen and (max-width:330px){
+    .formulario{
+        padding: 1rem;  
+    }
+}
