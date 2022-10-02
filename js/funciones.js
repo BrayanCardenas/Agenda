@@ -1,7 +1,7 @@
 const guardarContacto = (db, contacto) => {
     db.setItem(contacto.id, JSON.stringify( contacto));
-    window.location.href = '/';
-}
+   /*  window.location.href = '/';*/
+} 
 
 const cargarContactos = (db, parentNode) =>{
     let claves = Object.keys(db)
