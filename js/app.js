@@ -1,24 +1,32 @@
-const nombre = document.querySelector('.nombre')
-const numero = document.querySelector('.numero')
-const direccion = document.querySelector('.direccion')
-const agregaContacto = document.querySelector('.formulario__boton')/* 
+const nombre = document.querySelector('.nombre');
+const numero = document.querySelector('.numero');
+const direccion = document.querySelector('.direccion');
+const agregaContacto = document.querySelector('.formulario__boton');
+const listadoContactos = document.querySelector('.listado');
 
-const template = document.querySelector('#contacto').content
-const fragment = document.createDocumentFragment() */
+const db = window.localStorage
+cargarContactos(db, listadoContactos);
 
-const listadoContactos = document.querySelector('.listado')
+agregaContacto.addEventListener('click', () => {
+    const nombreVal = (nombre?.value || '').trim();
+    const numeroVal = (numero?.value || '').trim();
+    const direccionVal = (direccion?.value || '').trim();
 
-const db = window.sessionStorage
-
-agregaContacto.addEventListener('click', () =>{
-    let contacto = {
-        id: Math.random(1,10),
-        nombre: nombre.value,
-        numero: numero.value,
-        direccion: direccion.value
+    if (!nombreVal || !numeroVal || !direccionVal) {
+        alert('Completa nombre, número y dirección antes de agregar.');
+        return;
     }
 
-    guardarContacto(db, contacto)
-})
+    const contacto = {
+        id: Date.now(), // ID único
+        nombre: nombreVal,
+        numero: numeroVal,
+        direccion: direccionVal
+    };
 
-cargarContactos(db, listadoContactos);
+    guardarContacto(db, contacto)
+
+    nombre.value = "";
+    numero.value = "";
+    direccion.value = "";
+})

@@ -1,37 +1,19 @@
 const guardarContacto = (db, contacto) => {
-    db.setItem(contacto.id, JSON.stringify( contacto));
-    window.location.href = '/';
-} 
+    db.setItem(contacto.id, JSON.stringify(contacto));
+    cargarContactos(db, document.querySelector('.listado'));
+}
 
-const cargarContactos = (db, parentNode) =>{
+const cargarContactos = (db, parentNode) => {
+    parentNode.innerHTML = "";
     let claves = Object.keys(db)
-    /* console.log(claves) */ 
 
     for (const clave of claves) {
         let contacto = JSON.parse(db.getItem(clave))
-        crearContacto(parentNode, contacto, db) 
+        crearContacto(parentNode, contacto, db)
     }
 }
 
 const crearContacto = (parentNode, contacto, db) => {
-
-    /* template.querySelector('#nombre').textContent = contacto.nombre
-    template.querySelector('#numero').textContent = contacto.numero
-    template.querySelector('#direccion').textContent = contacto.direccion
-      
-    const clone = template.cloneNode(true)
-    
-    fragment.appendChild(clone)
-    
-    listadoContactos.appendChild(fragment)
-
-    let borrarContacto = document.querySelector('.listado__icono')
-
-    borrarContacto.addEventListener( 'click', () => {
-        db.removeItem(contacto.id)
-        window.location.href = '/';
-    }) */
-
 
     let divContacto = document.createElement('div')
     let nombreContacto = document.createElement('h3')
@@ -44,9 +26,9 @@ const crearContacto = (parentNode, contacto, db) => {
     direccionContacto.innerHTML = contacto.direccion
     iconoBorrar.innerHTML = 'delete_forever'
 
-    iconoBorrar.addEventListener( 'click', () => {
+    iconoBorrar.addEventListener('click', () => {
         db.removeItem(contacto.id)
-        window.location.href = '/';
+        cargarContactos(db, parentNode);
     })
 
     divContacto.classList.add('listado__contacto')
