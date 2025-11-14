@@ -24,6 +24,6 @@ Permite **añadir, listar y eliminar** contactos usando `localStorage` como base
 ---
 
 ## Vista previa
-https://brayancardenas.github.io/Cafe
+https://brayancardenas.github.io/Agenda
 
 ---
