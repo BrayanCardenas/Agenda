@@ -1,14 +1,29 @@
+const CONTACT_PREFIX = 'contacto:';
+
 const guardarContacto = (db, contacto) => {
-    db.setItem(contacto.id, JSON.stringify(contacto));
+    const key = `${CONTACT_PREFIX}${contacto.id}`;
+    db.setItem(key, JSON.stringify(contacto));
     cargarContactos(db, document.querySelector('.listado'));
 }
 
 const cargarContactos = (db, parentNode) => {
     parentNode.innerHTML = "";
-    let claves = Object.keys(db)
+    let claves = Object.keys(db).filter(e => e.startsWith(CONTACT_PREFIX))
 
     for (const clave of claves) {
-        let contacto = JSON.parse(db.getItem(clave))
+        let raw = db.getItem(clave);
+        if (!raw) continue;
+
+        let contacto;
+        try {
+            contacto = JSON.parse(raw);
+        } catch {
+            continue;
+        }
+
+        if (!contacto || !contacto.nombre || !contacto.numero || !contacto.direccion) {
+            continue;
+        }
         crearContacto(parentNode, contacto, db)
     }
 }
@@ -27,7 +42,8 @@ const crearContacto = (parentNode, contacto, db) => {
     iconoBorrar.innerHTML = 'delete_forever'
 
     iconoBorrar.addEventListener('click', () => {
-        db.removeItem(contacto.id)
+        const key = `${CONTACT_PREFIX}${contacto.id}`;
+        db.removeItem(key);
         cargarContactos(db, parentNode);
     })
 
